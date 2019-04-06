@@ -4,7 +4,7 @@
   "description": "Library with CRUD operations for OpenMRS db in JavaScript and typescript",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --config jestconfig.json",
     "build": "tsc",
     "lint": "tslint -p tsconfig.json"
   },
@@ -20,8 +20,13 @@
   },
   "homepage": "https://github.com/mdg583/openmrs-js#readme",
   "devDependencies": {
+    "@types/jest": "^24.0.11",
+    "jest": "^24.7.1",
+    "ts-jest": "^24.0.2",
     "tslint": "^5.15.0",
     "typescript": "^3.4.2"
   },
-  "files": ["lib/**/*"]
+  "files": [
+    "lib/**/*"
+  ]
 }
