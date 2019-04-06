@@ -1,0 +1,27 @@
+{
+  "name": "openmrs-js",
+  "version": "0.0.1",
+  "description": "Library with CRUD operations for OpenMRS db in JavaScript and typescript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "lint": "tslint -p tsconfig.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mdg583/openmrs-js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mdg583/openmrs-js/issues"
+  },
+  "homepage": "https://github.com/mdg583/openmrs-js#readme",
+  "devDependencies": {
+    "tslint": "^5.15.0",
+    "typescript": "^3.4.2"
+  },
+  "files": ["lib/**/*"]
+}
