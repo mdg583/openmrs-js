@@ -5,11 +5,11 @@ export class OpenMRSApiConnection extends OpenMRSConnection {
 		super();
 	}
 
-	public get(resource: string, query: string): any{
+	public get(resource: string, query: any): any{
 		throw new Error("Query-based get not supported for Rest API connection");
 	}
 
-	public getByUuid(resource: string, uuid: string): any{
+	public getByUuid(resource: string, uuid: string, query: any): any{
 		// not implemented
 		return null;
 	}

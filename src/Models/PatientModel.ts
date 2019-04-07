@@ -1,32 +1,52 @@
-import { OpenMRSModel, OpenMRSQuery } from "./OpenMRSModel";
+import { OpenMRSModel, OpenMRSSchema } from "./OpenMRSModel";
+import { OpenMRSQuery } from "./OpenMRSQuery";
 import { OneToManyJoin, OneToOneJoin } from "./OpenMRSJoins";
-import { Identifier, IdentifierModel } from "./IdentifierModel";
-import { PatientName, PatientNameModel } from "/PatientNameModel";
+import { Identifier, IdentifierSchema, IdentifierQuery } from "./IdentifierModel";
+import { PatientName, PatientNameSchema, PatientNameQuery } from "/PatientNameModel";
 
 // fields are given here for specific type definition ie for text editor
-export interface Patient {
+export class Patient {
 	id?: string;
 	age?: number;
 	identifiers?: Identifier[];
 	name?: PatientName;
 }
 
-export class PatientModel extends OpenMRSModel<Patient, PatientQuery> {
-	// fields and joins are repeated here for type of introspection
-	resourceName = "patient";
-	fields = {
+// fields and joins are repeated here for type of introspection (??)
+export const PatientSchema: OpenMRSSchema = {
+	fields: {
 		"id":"string",
 		"age":"number"
-	};
-	joins = {
-		"identifiers": OneToManyJoin(IdentifierModel),
-		"name": OneToOneJoin(PatientNameModel)
+	},
+	joins: {
+		"identifiers": {"type": "OneToMany", "schema": IdentifierSchema},
+		"name": 	   {"type": "OneToOne",  "schema": PatientNameSchema}
 	}
 }
 
-export class PatientQuery extends OpenMRSQuery {
-	get identifiers(): IdentifierModel { return this.getJoinModel("identifiers") as IdentifierModel; }
-	get name(): PatientNameModel { return this.getJoinModel("name") as PatientModel; }
+/*
 
+PatientQuery q = new PatientQuery(uuid);
+
+
+PatientQuery q = PatientModel.query(uuid);
+q.requireEq('field', 'val');
+q.attach('patientName');
+q.patientName.requireIsNotNull('field');
+Patient p = q.execute(connection)
+
+p = PatientModel.create()
+PatientModel.save(p)
+
+*/
+
+export class PatientModel extends OpenMRSModel<Patient, PatientQuery> {
+	private schema = PatientSchema;
+	private resourceName = "patient";
+}
+
+export class PatientQuery extends OpenMRSQuery {
+	get identifiers(): IdentifierQuery { return this.getJoinQuery("identifiers") as IdentifierQuery; }
+	get name(): PatientNameQuery { return this.getJoinQuery("name") as PatientNameQuery; }
 	// could have custom require methods here
 }
