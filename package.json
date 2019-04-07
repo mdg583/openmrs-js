@@ -28,5 +28,8 @@
   },
   "files": [
     "lib/**/*"
-  ]
+  ],
+  "dependencies": {
+    "moment": "^2.24.0"
+  }
 }
